@@ -46,7 +46,7 @@ public class DatabaseUpdate implements Runnable {
         //Passing query to prepared statement
         PreparedStatement ps = conn.prepareStatement(query);
 
-        while (LocalTime.now().isBefore(LocalTime.of(15,40))) {
+        while (LocalTime.now().isBefore(LocalTime.of(16,05))) {
             System.out.println("Updating database");
             dbTicks = TickerImpl.ticks;
             if (!dbTicks.isEmpty()) {
