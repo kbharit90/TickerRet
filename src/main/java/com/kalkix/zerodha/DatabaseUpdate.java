@@ -29,7 +29,7 @@ public class DatabaseUpdate implements Runnable {
         String url = "jdbc:postgresql://localhost/tickdb";
         Properties props = new Properties();
         props.setProperty("user","postgres");
-        props.setProperty("password","postgres");
+        props.setProperty("password","kalyans");
         //props.setProperty("ssl","true");
 
         //Passing json as string
@@ -41,21 +41,22 @@ public class DatabaseUpdate implements Runnable {
 
         //Creating database connection
         Connection conn = DriverManager.getConnection(url, props);
-        String query = "Update excel_ticks set info=? where instrument_token=?";
+        String query = "Update excel_ticks set info=(to_json(?::json)) where instrument_token=?";
 
         //Passing query to prepared statement
         PreparedStatement ps = conn.prepareStatement(query);
 
         while (LocalTime.now().isBefore(LocalTime.of(16,05))) {
-            System.out.println("Updating database");
+            //System.out.println("Updating database");
             dbTicks = TickerImpl.ticks;
             if (!dbTicks.isEmpty()) {
 
                 //Passing every tick to db with the help of instrument token
                 dbTicks.stream().forEach(t->{
                     try {
-                        jsonObject.setValue(obj.writeValueAsString(t));
-                        ps.setObject(1,jsonObject);
+
+                        //jsonObject.setValue(obj.writeValueAsString(t));
+                        ps.setObject(1,obj.writeValueAsString(t));
                         ps.setLong(2,t.getInstrumentToken());
                         ps.executeUpdate();
 

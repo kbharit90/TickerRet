@@ -1,5 +1,6 @@
 package com.kalkix.zerodha;
 
+import com.kalkix.Controller.RestServices;
 import com.zerodhatech.kiteconnect.kitehttp.exceptions.KiteException;
 import com.zerodhatech.models.Order;
 import com.zerodhatech.models.Tick;
@@ -29,7 +30,9 @@ public class TickerImpl {
                  * By default, all tokens are subscribed for modeQuote.
                  * */
                 System.out.println("Inside OnConnected method");
+
                 tickerProvider.subscribe(tokens);
+
 
             }
         });
@@ -56,6 +59,7 @@ public class TickerImpl {
                 System.out.println("ticks size "+ticks.size());
                 if(ticks.size() > 0) {
                     TickerImpl.ticks=ticks;
+                    RestServices.tick = ticks;
 
                 }
             }
