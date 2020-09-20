@@ -19,6 +19,7 @@ target/
 *.iml
 *.ipr
 *.properties
+OrderBook*
 
 ### NetBeans ###
 /nbproject/private/

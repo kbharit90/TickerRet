@@ -1,5 +1,7 @@
 package com.kalkix.zerodha;
 
+import com.opencsv.bean.CsvBindByName;
+
 import java.util.Objects;
 
 public class OrderBean {
@@ -35,21 +37,58 @@ public class OrderBean {
      * java.lang.String	validity
      * Order validity (DAY, IOC).
      */
+    @CsvBindByName(column = "&exchange")
     private String exchange;
+
+    @CsvBindByName(column = "&order_type")
     private String orderType;
-    private String parentOrderId;
+
+//    @CsvBindByName()
+//    private String parentOrderId;
+    @CsvBindByName(column = "&variety")
+    private String variety;
+
+    @CsvBindByName(column = "&validity")
     private String validity;
+
+    @CsvBindByName(column = "&product")
     private String product;
+
+    @CsvBindByName(column = "&tag")
     private String tag;
+
+    @CsvBindByName(column = "&tradingsymbol")
     private String tradingSymbol;
+
+    @CsvBindByName(column = "&transaction_type")
     private String transactionType;
+
+    @CsvBindByName(column = "&price")
     private double price;
+
+    @CsvBindByName(column = "&squareoff")
     private double squareOff;
+
+    @CsvBindByName(column = "&stoploss")
     private double stopLoss;
+
+    @CsvBindByName(column = "&trailing_stoploss")
     private double trailingStopLoss;
-    private double triggerPrice;
+
+    //private double triggerPrice;
+
+    @CsvBindByName(column = "&quantity")
     private int quantity;
+
     private int disclosedQuantity;
+
+    public String getVariety() {
+        return variety;
+    }
+
+    public void setVariety(String variety) {
+        this.variety = variety;
+    }
 
     public String getExchange() {
         return exchange;
@@ -67,13 +106,13 @@ public class OrderBean {
         this.orderType = orderType;
     }
 
-    public String getParentOrderId() {
-        return parentOrderId;
-    }
-
-    public void setParentOrderId(String parentOrderId) {
-        this.parentOrderId = parentOrderId;
-    }
+//    public String getParentOrderId() {
+//        return parentOrderId;
+//    }
+//
+//    public void setParentOrderId(String parentOrderId) {
+//        this.parentOrderId = parentOrderId;
+//    }
 
     public String getValidity() {
         return validity;
@@ -147,13 +186,13 @@ public class OrderBean {
         this.trailingStopLoss = trailingStopLoss;
     }
 
-    public double getTriggerPrice() {
-        return triggerPrice;
-    }
-
-    public void setTriggerPrice(double triggerPrice) {
-        this.triggerPrice = triggerPrice;
-    }
+//    public double getTriggerPrice() {
+//        return triggerPrice;
+//    }
+//
+//    public void setTriggerPrice(double triggerPrice) {
+//        this.triggerPrice = triggerPrice;
+//    }
 
     public int getQuantity() {
         return quantity;
@@ -171,12 +210,13 @@ public class OrderBean {
         this.disclosedQuantity = disclosedQuantity;
     }
 
+
     @Override
     public String toString() {
         return "OrderBean{" +
                 "exchange='" + exchange + '\'' +
                 ", orderType='" + orderType + '\'' +
-                ", parentOrderId='" + parentOrderId + '\'' +
+                ", variety='" + variety + '\'' +
                 ", validity='" + validity + '\'' +
                 ", product='" + product + '\'' +
                 ", tag='" + tag + '\'' +
@@ -186,36 +226,8 @@ public class OrderBean {
                 ", squareOff=" + squareOff +
                 ", stopLoss=" + stopLoss +
                 ", trailingStopLoss=" + trailingStopLoss +
-                ", triggerPrice=" + triggerPrice +
                 ", quantity=" + quantity +
                 ", disclosedQuantity=" + disclosedQuantity +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderBean orderBean = (OrderBean) o;
-        return Double.compare(orderBean.price, price) == 0 &&
-                Double.compare(orderBean.squareOff, squareOff) == 0 &&
-                Double.compare(orderBean.stopLoss, stopLoss) == 0 &&
-                Double.compare(orderBean.trailingStopLoss, trailingStopLoss) == 0 &&
-                Double.compare(orderBean.triggerPrice, triggerPrice) == 0 &&
-                quantity == orderBean.quantity &&
-                disclosedQuantity == orderBean.disclosedQuantity &&
-                Objects.equals(exchange, orderBean.exchange) &&
-                Objects.equals(orderType, orderBean.orderType) &&
-                Objects.equals(parentOrderId, orderBean.parentOrderId) &&
-                Objects.equals(validity, orderBean.validity) &&
-                Objects.equals(product, orderBean.product) &&
-                Objects.equals(tag, orderBean.tag) &&
-                Objects.equals(tradingSymbol, orderBean.tradingSymbol) &&
-                Objects.equals(transactionType, orderBean.transactionType);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(exchange, orderType, parentOrderId, validity, product, tag, tradingSymbol, transactionType, price, squareOff, stopLoss, trailingStopLoss, triggerPrice, quantity, disclosedQuantity);
     }
 }

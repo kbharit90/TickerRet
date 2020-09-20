@@ -29,7 +29,7 @@ public class DatabaseUpdate implements Runnable {
         String url = "jdbc:postgresql://localhost/tickdb";
         Properties props = new Properties();
         props.setProperty("user","postgres");
-        props.setProperty("password","kalyans");
+        props.setProperty("password","postgres");
         //props.setProperty("ssl","true");
 
         //Passing json as string

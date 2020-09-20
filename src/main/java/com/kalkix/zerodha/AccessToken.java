@@ -60,7 +60,9 @@ public class AccessToken {
 
             //Now get the token list for ticking
             getTokenList(kiteSdk);
-
+            PlaceOrderFromCSV csvOrder = new PlaceOrderFromCSV(kiteSdk);
+            Thread orderThread = new Thread(csvOrder);
+            orderThread.start();
 
         } catch (KiteException e) {
             e.printStackTrace();
