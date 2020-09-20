@@ -97,11 +97,11 @@ public class AccessToken {
             ArrayList<Long> tokens = new ArrayList<>();
             //Read CSV file data
             List<String[]> csvFileData = readAll();
-            List<String> symbol500 = new ArrayList<>();
+            List<String> zerodhaTickList = new ArrayList<>();
 
             //Adding nifty 500 symbols from csv file
             for (String s[] : csvFileData) {
-                symbol500.add(s[2]);
+                zerodhaTickList.add(s[0]);
             }
             FileWriter outputFile = new FileWriter("files/symbolList.csv");
             CSVWriter writer = new CSVWriter(outputFile);
@@ -109,7 +109,7 @@ public class AccessToken {
             data.add(new String[] {"Trading_Symbol","Instrument_Token"});
             //Going through all the instruments of NSE from Zerodha
             for(Instrument i : instruments) {
-                if(symbol500.contains(i.tradingsymbol)) {
+                if(zerodhaTickList.contains(i.tradingsymbol)) {
                     System.out.println("Filetered symbol"+i.tradingsymbol);
                     tokens.add(i.instrument_token);
                     data.add(new String[]{i.tradingsymbol, i.instrument_token+""});
@@ -138,7 +138,7 @@ public class AccessToken {
     }
 
     public List<String[]> readAll() throws Exception{
-        CSVReader csvReader = new CSVReader(new FileReader("files/nifty500.csv"));
+        CSVReader csvReader = new CSVReader(new FileReader("files/ZerodhaTickList.csv"));
         List<String[]> list = new ArrayList<>();
         list = csvReader.readAll();
         csvReader.close();
